@@ -28,13 +28,13 @@
     <meta name="theme-color" content="#0B3547" />
     <meta
       property="og:image"
-      content="images/AutoDiag_logo_transparent_1024.png"
+      content="https://oleksandrvsm-creator.github.io/site_autodiag/images/AutoDiag_logo_transparent_1024.png"
     />
     <meta property="og:image:alt" content="AutoDiag Málaga logo" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
-      content="images/AutoDiag_logo_transparent_1024.png"
+      content="https://oleksandrvsm-creator.github.io/site_autodiag/images/AutoDiag_logo_transparent_1024.png"
     />
     <link
       rel="icon"
@@ -529,7 +529,9 @@
           <img
             class="brand-logo"
             src="images/AutoDiag_logo_transparent_1024.png"
-            alt="AutoDiag logo"
+            alt="Logotipo de AutoDiag"
+            data-alt-es="Logotipo de AutoDiag"
+            data-alt-en="AutoDiag logo"
           />
           <span>AutoDiag Málaga</span>
         </a>
@@ -611,7 +613,9 @@
           <div class="hero-photo">
             <img
               src="images/hero-diagnostics.jpg"
-              alt="Technician using a diagnostic tablet beside an open engine bay"
+              alt="Técnico usando un equipo de diagnosis junto al motor abierto"
+              data-alt-es="Técnico usando un equipo de diagnosis junto al motor abierto"
+              data-alt-en="Technician using a diagnostic tablet beside an open engine bay"
             />
           </div>
         </div>
@@ -623,7 +627,9 @@
               <img
                 class="service-photo"
                 src="images/7X4VY.png"
-                alt="Engine warning illustration"
+                alt="Ilustración de testigo del motor"
+                data-alt-es="Ilustración de testigo del motor"
+                data-alt-en="Engine warning illustration"
               />
               <div class="service-copy">
                 <dt data-i18n="service1Title">
@@ -639,7 +645,9 @@
               <img
                 class="service-photo"
                 src="images/VLSZO.png"
-                alt="Car battery illustration"
+                alt="Ilustración de batería de coche"
+                data-alt-es="Ilustración de batería de coche"
+                data-alt-en="Car battery illustration"
               />
               <div class="service-copy">
                 <dt data-i18n="service2Title">
@@ -655,7 +663,9 @@
               <img
                 class="service-photo"
                 src="images/Ko7P8.png"
-                alt="Electrical fault illustration"
+                alt="Ilustración de avería eléctrica"
+                data-alt-es="Ilustración de avería eléctrica"
+                data-alt-en="Electrical fault illustration"
               />
               <div class="service-copy">
                 <dt data-i18n="service3Title">
@@ -670,7 +680,9 @@
               <img
                 class="service-photo"
                 src="images/7CcGj.png"
-                alt="Electric and hybrid car illustration"
+                alt="Ilustración de coche eléctrico o híbrido"
+                data-alt-es="Ilustración de coche eléctrico o híbrido"
+                data-alt-en="Electric and hybrid car illustration"
               />
               <div class="service-copy">
                 <dt data-i18n="service4Title">Coche eléctrico o híbrido</dt>
@@ -684,7 +696,9 @@
               <img
                 class="service-photo"
                 src="images/fdgo5.png"
-                alt="Electrical repair illustration"
+                alt="Ilustración de reparación eléctrica"
+                data-alt-es="Ilustración de reparación eléctrica"
+                data-alt-en="Electrical repair illustration"
               />
               <div class="service-copy">
                 <dt data-i18n="service5Title">Reparación eléctrica</dt>
@@ -698,7 +712,9 @@
               <img
                 class="service-photo"
                 src="images/w2oag.png"
-                alt="Used car inspection illustration"
+                alt="Ilustración de inspección de coche usado"
+                data-alt-es="Ilustración de inspección de coche usado"
+                data-alt-en="Used car inspection illustration"
               />
               <div class="service-copy">
                 <dt data-i18n="service6Title">Vas a comprar un coche usado</dt>
@@ -972,6 +988,12 @@
             button.dataset.language === language,
           );
         });
+        document
+          .querySelectorAll("[data-alt-es][data-alt-en]")
+          .forEach((image) => {
+            image.alt =
+              language === "es" ? image.dataset.altEs : image.dataset.altEn;
+          });
         document
           .querySelectorAll('a[href^="https://wa.me/"]')
           .forEach((link) => {
