@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title data-i18n="pageTitle">
+      AutoDiag Málaga | Diagnosis y electricidad del automóvil a domicilio
+    </title>
+    <meta
+      name="description"
+      data-i18n-content="pageDescription"
+      content="Diagnosis de coches y reparación de electricidad del automóvil a domicilio en Málaga, Torremolinos, Benalmádena, Fuengirola, Marbella, Vélez-Málaga y toda la Costa del Sol. Escríbeme por WhatsApp."
+    />
+    <meta
+      property="og:title"
+      data-i18n-content="pageTitle"
+      content="AutoDiag Málaga | Diagnosis y electricidad del automóvil a domicilio"
+    />
+    <meta
+      property="og:description"
+      data-i18n-content="pageDescription"
+      content="Voy donde esté tu coche: diagnosis con equipo profesional y reparación eléctrica en la Costa del Sol."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0B3547" />
+    <meta
+      property="og:image"
+      content="images/AutoDiag_logo_transparent_1024.png"
+    />
+    <meta property="og:image:alt" content="AutoDiag Málaga logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="images/AutoDiag_logo_transparent_1024.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="images/AutoDiag_logo_transparent_1024.png"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutoRepair",
+        "name": "AutoDiag Málaga",
+        "description": "Diagnosis y electricidad del automóvil a domicilio en la Costa del Sol.",
+        "telephone": "+34637259702",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Málaga",
+          "addressCountry": "ES"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Málaga" },
+          { "@type": "City", "name": "Torremolinos" },
+          { "@type": "City", "name": "Benalmádena" },
+          { "@type": "City", "name": "Fuengirola" },
+          { "@type": "City", "name": "Marbella" },
+          { "@type": "City", "name": "Vélez-Málaga" }
+        ]
+      }
+    </script>
+
+    <style>
+      :root {
+        --sea: #0b3547;
+        --sea-2: #12495f;
+        --foam: #f4f8f8;
+        --ink: #10242c;
+        --muted: #46606a;
+        --line: #c9d8dc;
+        --amber: #ffb000;
+        --wa: #12783f;
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--foam);
+        color: var(--ink);
+        font-family:
+          "Avenir Next",
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.6;
+      }
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding-inline: clamp(20px, 5vw, 40px);
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      /* Header */
+      header {
+        background: #0b1828;
+        border-bottom: 3px solid var(--amber);
+        box-shadow: 0 2px 16px rgba(5, 15, 28, 0.24);
+      }
+      header .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-block: 18px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 1.2rem;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        color: #fff;
+      }
+      .brand-logo {
+        display: block;
+        width: 68px;
+        height: 68px;
+        object-fit: contain;
+        flex: none;
+      }
+      .head-tel {
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+      }
+      .head-tel:hover {
+        text-decoration: underline;
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .head-tel {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .head-tel svg {
+        width: 19px;
+        height: 19px;
+        flex: none;
+      }
+      .lang-switch {
+        display: inline-flex;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 10px;
+      }
+      .lang-btn {
+        border: 0;
+        border-radius: 7px;
+        padding: 5px 8px;
+        background: transparent;
+        color: #d5e4e8;
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .lang-btn[aria-pressed="true"] {
+        background: var(--amber);
+        color: #10242c;
+      }
+      .lang-btn:focus-visible {
+        outline: 2px solid var(--amber);
+        outline-offset: 1px;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 52px;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        text-decoration: none;
+        border: 2px solid transparent;
+      }
+      .btn svg {
+        width: 22px;
+        height: 22px;
+        flex: none;
+      }
+      .btn-wa {
+        background: var(--wa);
+        color: #fff;
+      }
+      .btn-wa:hover {
+        background: #0e6134;
+      }
+      .btn-call {
+        border-color: var(--sea);
+        color: var(--sea);
+        background: transparent;
+      }
+      .btn-call:hover {
+        background: var(--sea);
+        color: #fff;
+      }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: clamp(28px, 6vw, 64px);
+        align-items: center;
+        padding-block: clamp(28px, 6vw, 64px) clamp(40px, 7vw, 80px);
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2.1rem, 6.4vw, 3.6rem);
+        line-height: 1.05;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--sea);
+      }
+      .lead {
+        margin: 20px 0 0;
+        max-width: 34rem;
+        font-size: 1.15rem;
+        color: var(--muted);
+      }
+
+      /* Hero photo */
+      .hero-photo {
+        margin: 0;
+        overflow: hidden;
+        border-radius: 28px;
+        background: var(--sea);
+        box-shadow: 0 18px 34px rgba(16, 36, 44, 0.2);
+        aspect-ratio: 4 / 3;
+      }
+      .hero-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .lamp svg {
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 3.4;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+      }
+      .lamp {
+        color: rgba(255, 255, 255, 0.2);
+      }
+      .lamp.small svg {
+        width: clamp(44px, 9vw, 60px);
+        height: auto;
+      }
+      .lamp.on {
+        color: var(--amber);
+      }
+      .lamp.on svg {
+        width: clamp(96px, 20vw, 140px);
+        height: auto;
+        filter: drop-shadow(0 0 14px rgba(255, 176, 0, 0.65));
+        animation: selftest 1.4s ease-out 0.3s both;
+      }
+      @keyframes selftest {
+        0% {
+          opacity: 0.15;
+          filter: none;
+        }
+        18% {
+          opacity: 1;
+          filter: drop-shadow(0 0 14px rgba(255, 176, 0, 0.65));
+        }
+        30% {
+          opacity: 0.25;
+          filter: none;
+        }
+        55% {
+          opacity: 1;
+          filter: drop-shadow(0 0 14px rgba(255, 176, 0, 0.65));
+        }
+        100% {
+          opacity: 1;
+          filter: drop-shadow(0 0 14px rgba(255, 176, 0, 0.65));
+        }
+      }
+
+      /* Sections */
+      section {
+        padding-block: clamp(36px, 6vw, 64px);
+        border-top: 1px solid var(--line);
+      }
+      h2 {
+        margin: 0 0 24px;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--sea);
+      }
+
+      /* Services */
+      .services {
+        margin: 0;
+      }
+      .service {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 8px 20px;
+        padding-block: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .service:first-child {
+        padding-top: 0;
+      }
+      .service-photo {
+        width: 72px;
+        height: 72px;
+        object-fit: cover;
+        border-radius: 12px;
+        grid-row: span 2;
+      }
+      .service-copy {
+        min-width: 0;
+      }
+      .service dt {
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .service dd {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* Steps */
+      .steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 22px;
+        counter-reset: step;
+        max-width: 42rem;
+      }
+      .steps li {
+        position: relative;
+        padding-left: 56px;
+        counter-increment: step;
+      }
+      .steps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--sea);
+        color: var(--amber);
+        font-weight: 800;
+      }
+      .steps strong {
+        display: block;
+      }
+      .steps span {
+        color: var(--muted);
+      }
+
+      /* Zone */
+      .zone {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+        gap: clamp(24px, 5vw, 56px);
+        align-items: center;
+        max-width: none;
+      }
+      .zone p {
+        margin: 0 0 10px;
+      }
+      .towns {
+        font-weight: 700;
+        color: var(--sea);
+      }
+      .map-frame {
+        width: 100%;
+        min-height: 300px;
+        border: 0;
+        border-radius: 18px;
+        box-shadow: 0 10px 24px rgba(16, 36, 44, 0.14);
+      }
+      .map-credit {
+        margin: 8px 0 0;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .map-credit a {
+        color: var(--sea);
+      }
+
+      /* Contact */
+      .contact {
+        background: var(--sea);
+        color: #fff;
+        border-top: 0;
+      }
+      .contact h2 {
+        color: #fff;
+      }
+      .contact p {
+        max-width: 36rem;
+        margin: 0;
+        color: #d5e4e8;
+      }
+      .contact .btn-call {
+        border-color: #fff;
+        color: #fff;
+      }
+      .contact .btn-call:hover {
+        background: #fff;
+        color: var(--sea);
+      }
+
+      footer {
+        padding-block: 28px 40px;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      footer details {
+        margin-top: 10px;
+        max-width: 40rem;
+      }
+      footer summary {
+        cursor: pointer;
+      }
+
+      /* Sticky contact bar on phones */
+      .bar {
+        display: none;
+      }
+      @media (max-width: 800px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .service {
+          grid-template-columns: 72px minmax(0, 1fr);
+        }
+        .zone {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 720px) {
+        body {
+          padding-bottom: 88px;
+        }
+        .bar {
+          display: flex;
+          gap: 10px;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+          background: rgba(244, 248, 248, 0.96);
+          border-top: 1px solid var(--line);
+          z-index: 10;
+        }
+        .bar .btn {
+          flex: 1;
+          padding: 12px 8px;
+        }
+        .head-tel {
+          display: none;
+        }
+        .header-actions {
+          gap: 8px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .lamp.on svg {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <a class="brand" href="#">
+          <img
+            class="brand-logo"
+            src="images/AutoDiag_logo_transparent_1024.png"
+            alt="AutoDiag logo"
+          />
+          <span>AutoDiag Málaga</span>
+        </a>
+        <div class="header-actions">
+          <a class="head-tel" href="tel:+34637259702" aria-label="637 259 702">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+            637 259 702
+          </a>
+          <div class="lang-switch" aria-label="Language selection">
+            <button
+              class="lang-btn"
+              type="button"
+              data-language="es"
+              aria-pressed="true"
+            >
+              ES
+            </button>
+            <button
+              class="lang-btn"
+              type="button"
+              data-language="en"
+              aria-pressed="false"
+            >
+              EN
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <div class="hero">
+          <div>
+            <h1 data-i18n="heroTitle">
+              Diagnosis y electricidad del automóvil a domicilio en Málaga
+            </h1>
+            <p class="lead" data-i18n="heroLead">
+              ¿Testigo encendido, el coche no arranca o falla algo eléctrico?
+              Voy donde esté tu coche, en tu casa, en el trabajo o en la calle,
+              por toda la Costa del Sol.
+            </p>
+            <div class="btn-row">
+              <a
+                class="btn btn-wa"
+                href="https://wa.me/34637259702?text=Hola%2C%20necesito%20una%20diagnosis%20a%20domicilio.%0AMarca%20y%20modelo%3A%0AS%C3%ADntoma%3A%0AZona%3A"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 5h16v11H10l-6 4z" />
+                </svg>
+                <span data-i18n="whatsapp">Escribir por WhatsApp</span>
+              </a>
+              <a class="btn btn-call" href="tel:+34637259702" data-i18n="call"
+                >Llamar al 637 259 702</a
+              >
+            </div>
+          </div>
+
+          <div class="hero-photo">
+            <img
+              src="images/hero-diagnostics.jpg"
+              alt="Technician using a diagnostic tablet beside an open engine bay"
+            />
+          </div>
+        </div>
+
+        <section id="servicios">
+          <h2 data-i18n="servicesTitle">Qué le pasa a tu coche</h2>
+          <dl class="services">
+            <div class="service">
+              <img
+                class="service-photo"
+                src="images/7X4VY.png"
+                alt="Engine warning illustration"
+              />
+              <div class="service-copy">
+                <dt data-i18n="service1Title">
+                  El testigo del motor está encendido
+                </dt>
+                <dd data-i18n="service1Text">
+                  Leo las averías con equipo de diagnosis y busco la causa real,
+                  no solo el código.
+                </dd>
+              </div>
+            </div>
+            <div class="service">
+              <img
+                class="service-photo"
+                src="images/VLSZO.png"
+                alt="Car battery illustration"
+              />
+              <div class="service-copy">
+                <dt data-i18n="service2Title">
+                  No arranca o se queda sin batería
+                </dt>
+                <dd data-i18n="service2Text">
+                  Compruebo batería, alternador, motor de arranque y consumos
+                  que la descargan.
+                </dd>
+              </div>
+            </div>
+            <div class="service">
+              <img
+                class="service-photo"
+                src="images/Ko7P8.png"
+                alt="Electrical fault illustration"
+              />
+              <div class="service-copy">
+                <dt data-i18n="service3Title">
+                  Fallos eléctricos que van y vienen
+                </dt>
+                <dd data-i18n="service3Text">
+                  Luces, elevalunas, cierre centralizado, sensores y cableado.
+                </dd>
+              </div>
+            </div>
+            <div class="service">
+              <img
+                class="service-photo"
+                src="images/7CcGj.png"
+                alt="Electric and hybrid car illustration"
+              />
+              <div class="service-copy">
+                <dt data-i18n="service4Title">Coche eléctrico o híbrido</dt>
+                <dd data-i18n="service4Text">
+                  Diagnosis de averías y avisos en vehículos eléctricos e
+                  híbridos.
+                </dd>
+              </div>
+            </div>
+            <div class="service">
+              <img
+                class="service-photo"
+                src="images/fdgo5.png"
+                alt="Electrical repair illustration"
+              />
+              <div class="service-copy">
+                <dt data-i18n="service5Title">Reparación eléctrica</dt>
+                <dd data-i18n="service5Text">
+                  Reparo cableado, sensores y módulos, en el mismo sitio cuando
+                  es posible.
+                </dd>
+              </div>
+            </div>
+            <div class="service">
+              <img
+                class="service-photo"
+                src="images/w2oag.png"
+                alt="Used car inspection illustration"
+              />
+              <div class="service-copy">
+                <dt data-i18n="service6Title">Vas a comprar un coche usado</dt>
+                <dd data-i18n="service6Text">
+                  Revisión eléctrica y lectura de averías antes de pagar.
+                </dd>
+              </div>
+            </div>
+          </dl>
+        </section>
+
+        <section id="como-funciona">
+          <h2 data-i18n="howTitle">Cómo funciona</h2>
+          <ol class="steps">
+            <li>
+              <strong data-i18n="step1Title">Me escribes por WhatsApp</strong
+              ><span data-i18n="step1Text"
+                >Marca, modelo, año y qué le pasa. Una foto del testigo o del
+                aviso ayuda mucho.</span
+              >
+            </li>
+            <li>
+              <strong data-i18n="step2Title">Quedamos en tu zona</strong
+              ><span data-i18n="step2Text"
+                >Acordamos día, hora y lugar. Voy yo con el equipo.</span
+              >
+            </li>
+            <li>
+              <strong data-i18n="step3Title">Diagnosis en el sitio</strong
+              ><span data-i18n="step3Text"
+                >Te explico qué falla y qué hay que hacer. Si se puede reparar
+                allí, lo hago.</span
+              >
+            </li>
+          </ol>
+        </section>
+
+        <section id="zona">
+          <h2 data-i18n="zoneTitle">Zona de servicio</h2>
+          <div class="zone">
+            <div>
+              <p class="towns">
+                Málaga · Torremolinos · Benalmádena · Fuengirola · Marbella ·
+                Vélez-Málaga
+              </p>
+              <p data-i18n="zoneText">
+                Y el resto de la Costa del Sol. Si tu coche está en otro pueblo
+                cercano, escríbeme y lo miramos.
+              </p>
+            </div>
+            <div>
+              <iframe
+                class="map-frame"
+                title="Costa del Sol map"
+                loading="lazy"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-5.0714%2C36.3713%2C-3.7714%2C37.0713&layer=mapnik&marker=36.7213%2C-4.4214"
+              ></iframe>
+              <p class="map-credit">
+                <a
+                  href="https://www.openstreetmap.org/?mlat=36.7213&mlon=-4.4214#map=11/36.7213/-4.4214"
+                  target="_blank"
+                  rel="noopener"
+                  data-i18n="mapLink"
+                  >Ver mapa más grande</a
+                >
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="contact" id="contacto">
+        <div class="wrap">
+          <h2 data-i18n="contactTitle">¿Tu coche te ha dado un aviso?</h2>
+          <p data-i18n="contactText">
+            Escríbeme con la marca, el modelo y una foto del testigo. Te
+            respondo lo antes posible.
+          </p>
+          <div class="btn-row">
+            <a
+              class="btn btn-wa"
+              href="https://wa.me/34637259702?text=Hola%2C%20necesito%20una%20diagnosis%20a%20domicilio.%0AMarca%20y%20modelo%3A%0AS%C3%ADntoma%3A%0AZona%3A"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path d="M4 5h16v11H10l-6 4z" />
+              </svg>
+              <span data-i18n="whatsapp">Escribir por WhatsApp</span>
+            </a>
+            <a class="btn btn-call" href="tel:+34637259702" data-i18n="call"
+              >Llamar al 637 259 702</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div>© 2026 AutoDiag Málaga</div>
+        <details>
+          <summary data-i18n="legalTitle">Aviso legal</summary>
+          <p>
+            <!-- RELLENA ESTOS DATOS ANTES DE PUBLICAR -->
+            <span data-i18n="legalDetails"
+              >Titular: [TU NOMBRE Y APELLIDOS] · NIF: [TU NIF] · Domicilio: [TU
+              DIRECCIÓN, MÁLAGA] · Teléfono: 637 259 702 · Email: [TU
+              EMAIL]</span
+            >
+          </p>
+          <p data-i18n="privacy">
+            Esta web no utiliza cookies ni recoge datos personales. Si me
+            escribes por WhatsApp o por teléfono, uso tus datos solo para
+            atender tu consulta.
+          </p>
+        </details>
+      </div>
+    </footer>
+
+    <div class="bar">
+      <a
+        class="btn btn-wa"
+        href="https://wa.me/34637259702?text=Hola%2C%20necesito%20una%20diagnosis%20a%20domicilio.%0AMarca%20y%20modelo%3A%0AS%C3%ADntoma%3A%0AZona%3A"
+        data-i18n="whatsappShort"
+        >WhatsApp</a
+      >
+      <a class="btn btn-call" href="tel:+34637259702" data-i18n="callShort"
+        >Llamar</a
+      >
+    </div>
+
+    <script>
+      const translations = {
+        es: {
+          pageTitle:
+            "AutoDiag Málaga | Diagnosis y electricidad del automóvil a domicilio",
+          pageDescription:
+            "Diagnosis de coches y reparación de electricidad del automóvil a domicilio en Málaga, Torremolinos, Benalmádena, Fuengirola, Marbella, Vélez-Málaga y toda la Costa del Sol. Escríbeme por WhatsApp.",
+          heroTitle:
+            "Diagnosis y electricidad del automóvil a domicilio en Málaga",
+          heroLead:
+            "¿Testigo encendido, el coche no arranca o falla algo eléctrico? Voy donde esté tu coche, en tu casa, en el trabajo o en la calle, por toda la Costa del Sol.",
+          whatsapp: "Escribir por WhatsApp",
+          call: "Llamar al 637 259 702",
+          whatsappShort: "WhatsApp",
+          callShort: "Llamar",
+          servicesTitle: "Qué le pasa a tu coche",
+          service1Title: "El testigo del motor está encendido",
+          service1Text:
+            "Leo las averías con equipo de diagnosis y busco la causa real, no solo el código.",
+          service2Title: "No arranca o se queda sin batería",
+          service2Text:
+            "Compruebo batería, alternador, motor de arranque y consumos que la descargan.",
+          service3Title: "Fallos eléctricos que van y vienen",
+          service3Text:
+            "Luces, elevalunas, cierre centralizado, sensores y cableado.",
+          service4Title: "Coche eléctrico o híbrido",
+          service4Text:
+            "Diagnosis de averías y avisos en vehículos eléctricos e híbridos.",
+          service5Title: "Reparación eléctrica",
+          service5Text:
+            "Reparo cableado, sensores y módulos, en el mismo sitio cuando es posible.",
+          service6Title: "Vas a comprar un coche usado",
+          service6Text:
+            "Revisión eléctrica y lectura de averías antes de pagar.",
+          howTitle: "Cómo funciona",
+          step1Title: "Me escribes por WhatsApp",
+          step1Text:
+            "Marca, modelo, año y qué le pasa. Una foto del testigo o del aviso ayuda mucho.",
+          step2Title: "Quedamos en tu zona",
+          step2Text: "Acordamos día, hora y lugar. Voy yo con el equipo.",
+          step3Title: "Diagnosis en el sitio",
+          step3Text:
+            "Te explico qué falla y qué hay que hacer. Si se puede reparar allí, lo hago.",
+          zoneTitle: "Zona de servicio",
+          zoneText:
+            "Y el resto de la Costa del Sol. Si tu coche está en otro pueblo cercano, escríbeme y lo miramos.",
+          mapLink: "Ver mapa más grande",
+          contactTitle: "¿Tu coche te ha dado un aviso?",
+          contactText:
+            "Escríbeme con la marca, el modelo y una foto del testigo. Te respondo lo antes posible.",
+          legalTitle: "Aviso legal",
+          legalDetails:
+            "Titular: [TU NOMBRE Y APELLIDOS] · NIF: [TU NIF] · Domicilio: [TU DIRECCIÓN, MÁLAGA] · Teléfono: 637 259 702 · Email: [TU EMAIL]",
+          privacy:
+            "Esta web no utiliza cookies ni recoge datos personales. Si me escribes por WhatsApp o por teléfono, uso tus datos solo para atender tu consulta.",
+        },
+        en: {
+          pageTitle:
+            "AutoDiag Malaga | Mobile car diagnostics and auto electrics",
+          pageDescription:
+            "Mobile car diagnostics and auto electrical repairs in Malaga, Torremolinos, Benalmadena, Fuengirola, Marbella, Velez-Malaga and the Costa del Sol. Message me on WhatsApp.",
+          heroTitle: "Mobile car diagnostics and auto electrics in Malaga",
+          heroLead:
+            "Is a warning light on, will your car not start, or is there an electrical fault? I come to your car at home, work or on the road anywhere along the Costa del Sol.",
+          whatsapp: "Message on WhatsApp",
+          call: "Call 637 259 702",
+          whatsappShort: "WhatsApp",
+          callShort: "Call",
+          servicesTitle: "What is wrong with your car?",
+          service1Title: "The engine warning light is on",
+          service1Text:
+            "I read the faults with professional diagnostic equipment and find the real cause, not just the code.",
+          service2Title: "It will not start or the battery keeps going flat",
+          service2Text:
+            "I check the battery, alternator, starter motor and drains that discharge it.",
+          service3Title: "Intermittent electrical faults",
+          service3Text:
+            "Lights, electric windows, central locking, sensors and wiring.",
+          service4Title: "Electric or hybrid car",
+          service4Text:
+            "Diagnostics for faults and warnings in electric and hybrid vehicles.",
+          service5Title: "Electrical repairs",
+          service5Text:
+            "I repair wiring, sensors and modules on site whenever possible.",
+          service6Title: "You are buying a used car",
+          service6Text:
+            "Electrical inspection and fault-code reading before you pay.",
+          howTitle: "How it works",
+          step1Title: "Message me on WhatsApp",
+          step1Text:
+            "Make, model, year and what is wrong. A photo of the warning light or message helps a lot.",
+          step2Title: "We meet in your area",
+          step2Text:
+            "We agree on a day, time and place. I come with the equipment.",
+          step3Title: "Diagnostics on site",
+          step3Text:
+            "I explain what is wrong and what needs to be done. If it can be repaired there, I do it.",
+          zoneTitle: "Service area",
+          zoneText:
+            "And the rest of the Costa del Sol. If your car is in another nearby town, message me and we will work it out.",
+          mapLink: "View larger map",
+          contactTitle: "Has your car given you a warning?",
+          contactText:
+            "Message me with the make, model and a photo of the warning light. I will reply as soon as possible.",
+          legalTitle: "Legal notice",
+          legalDetails:
+            "Owner: [YOUR FULL NAME] · Tax ID: [YOUR TAX ID] · Address: [YOUR ADDRESS, MALAGA] · Phone: 637 259 702 · Email: [YOUR EMAIL]",
+          privacy:
+            "This website does not use cookies or collect personal data. If you contact me by WhatsApp or phone, I use your data only to answer your enquiry.",
+        },
+      };
+
+      const whatsappMessages = {
+        es: "Hola, necesito una diagnosis a domicilio.\nMarca y modelo:\nSíntoma:\nZona:",
+        en: "Hello, I need a mobile car diagnosis.\nMake and model:\nSymptom:\nArea:",
+      };
+
+      function setLanguage(language) {
+        const dictionary = translations[language];
+        document.documentElement.lang = language;
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+          element.textContent = dictionary[element.dataset.i18n];
+        });
+        document.querySelectorAll("[data-i18n-content]").forEach((element) => {
+          element.setAttribute(
+            "content",
+            dictionary[element.dataset.i18nContent],
+          );
+        });
+        document.querySelectorAll("[data-language]").forEach((button) => {
+          button.setAttribute(
+            "aria-pressed",
+            button.dataset.language === language,
+          );
+        });
+        document
+          .querySelectorAll('a[href^="https://wa.me/"]')
+          .forEach((link) => {
+            link.href =
+              "https://wa.me/34637259702?text=" +
+              encodeURIComponent(whatsappMessages[language]);
+          });
+        localStorage.setItem("autodiag-language", language);
+      }
+
+      document.querySelectorAll("[data-language]").forEach((button) => {
+        button.addEventListener("click", () =>
+          setLanguage(button.dataset.language),
+        );
+      });
+      setLanguage(localStorage.getItem("autodiag-language") || "es");
+    </script>
+  </body>
+</html>
