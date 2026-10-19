@@ -169,30 +169,81 @@
         flex: none;
       }
       .lang-switch {
+        position: relative;
+      }
+      .flag {
+        display: block;
+        width: 22px;
+        height: 15px;
+        flex: none;
+        border-radius: 2px;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+      }
+      .lang-toggle {
         display: inline-flex;
-        gap: 4px;
-        padding: 4px;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 10px;
         border: 1px solid rgba(255, 255, 255, 0.28);
         border-radius: 10px;
-      }
-      .lang-btn {
-        border: 0;
-        border-radius: 7px;
-        padding: 5px 8px;
         background: transparent;
-        color: #d5e4e8;
+        color: #fff;
         font: inherit;
         font-size: 0.85rem;
         font-weight: 800;
         cursor: pointer;
       }
-      .lang-btn[aria-pressed="true"] {
+      .lang-toggle:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .lang-toggle .chev {
+        width: 14px;
+        height: 14px;
+        transition: transform 0.15s;
+      }
+      .lang-toggle[aria-expanded="true"] .chev {
+        transform: rotate(180deg);
+      }
+      .lang-menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        z-index: 30;
+        min-width: 176px;
+        margin: 0;
+        padding: 6px;
+        list-style: none;
+        background: #0b1828;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 12px 28px rgba(5, 15, 28, 0.4);
+      }
+      .lang-menu[hidden] {
+        display: none;
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 9px 10px;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: #d5e4e8;
+        font: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-align: left;
+        cursor: pointer;
+      }
+      .lang-option:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .lang-option[aria-selected="true"] {
         background: var(--amber);
         color: #10242c;
-      }
-      .lang-btn:focus-visible {
-        outline: 2px solid var(--amber);
-        outline-offset: 1px;
+        font-weight: 800;
       }
 
       /* Buttons */
@@ -524,6 +575,34 @@
     </style>
   </head>
   <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="flag-es" viewBox="0 0 30 20" preserveAspectRatio="none">
+          <rect width="30" height="20" fill="#aa151b" />
+          <rect y="5" width="30" height="10" fill="#f1bf00" />
+        </symbol>
+        <symbol id="flag-ru" viewBox="0 0 30 20" preserveAspectRatio="none">
+          <rect width="30" height="20" fill="#fff" />
+          <rect y="6.67" width="30" height="6.67" fill="#0039a6" />
+          <rect y="13.33" width="30" height="6.67" fill="#d52b1e" />
+        </symbol>
+        <symbol id="flag-uk" viewBox="0 0 30 20" preserveAspectRatio="none">
+          <rect width="30" height="10" fill="#0057b7" />
+          <rect y="10" width="30" height="10" fill="#ffd700" />
+        </symbol>
+        <symbol id="flag-en" viewBox="0 0 60 30" preserveAspectRatio="none">
+          <clipPath id="gb-s"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
+          <clipPath id="gb-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" /></clipPath>
+          <g clip-path="url(#gb-s)">
+            <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" />
+            <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gb-t)" stroke="#c8102e" stroke-width="4" />
+            <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10" />
+            <path d="M30,0 v30 M0,15 h60" stroke="#c8102e" stroke-width="6" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
     <header>
       <div class="wrap">
         <a class="brand" href="#">
@@ -533,6 +612,8 @@
             alt="Logotipo de AutoDiag"
             data-alt-es="Logotipo de AutoDiag"
             data-alt-en="AutoDiag logo"
+            data-alt-ru="Логотип AutoDiag"
+            data-alt-uk="Логотип AutoDiag"
           />
           <span>AutoDiag Málaga</span>
         </a>
@@ -553,23 +634,81 @@
             </svg>
             637 259 702
           </a>
-          <div class="lang-switch" aria-label="Language selection">
+          <div class="lang-switch" id="lang-switch">
             <button
-              class="lang-btn"
+              class="lang-toggle"
+              id="lang-toggle"
               type="button"
-              data-language="es"
-              aria-pressed="true"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="lang-menu"
+              aria-label="Idioma / Language / Язык / Мова"
             >
-              ES
+              <svg class="flag" aria-hidden="true"><use href="#flag-es" /></svg>
+              <span id="lang-code">ES</span>
+              <svg
+                class="chev"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
             </button>
-            <button
-              class="lang-btn"
-              type="button"
-              data-language="en"
-              aria-pressed="false"
-            >
-              EN
-            </button>
+            <ul class="lang-menu" id="lang-menu" role="listbox" hidden>
+              <li role="presentation">
+                <button
+                  class="lang-option"
+                  type="button"
+                  role="option"
+                  data-language="es"
+                  aria-selected="true"
+                >
+                  <svg class="flag" aria-hidden="true"><use href="#flag-es" /></svg>
+                  <span>Español</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button
+                  class="lang-option"
+                  type="button"
+                  role="option"
+                  data-language="en"
+                  aria-selected="false"
+                >
+                  <svg class="flag" aria-hidden="true"><use href="#flag-en" /></svg>
+                  <span>English</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button
+                  class="lang-option"
+                  type="button"
+                  role="option"
+                  data-language="ru"
+                  aria-selected="false"
+                >
+                  <svg class="flag" aria-hidden="true"><use href="#flag-ru" /></svg>
+                  <span>Русский</span>
+                </button>
+              </li>
+              <li role="presentation">
+                <button
+                  class="lang-option"
+                  type="button"
+                  role="option"
+                  data-language="uk"
+                  aria-selected="false"
+                >
+                  <svg class="flag" aria-hidden="true"><use href="#flag-uk" /></svg>
+                  <span>Українська</span>
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -622,6 +761,8 @@
               alt="Técnico usando un equipo de diagnosis junto al motor abierto"
               data-alt-es="Técnico usando un equipo de diagnosis junto al motor abierto"
               data-alt-en="Technician using a diagnostic tablet beside an open engine bay"
+              data-alt-ru="Техник с диагностическим планшетом возле открытого двигателя"
+              data-alt-uk="Технік із діагностичним планшетом біля відкритого двигуна"
             />
           </div>
         </div>
@@ -636,6 +777,8 @@
                 alt="Ilustración de testigo del motor"
                 data-alt-es="Ilustración de testigo del motor"
                 data-alt-en="Engine warning illustration"
+                data-alt-ru="Иллюстрация индикатора двигателя"
+                data-alt-uk="Ілюстрація індикатора двигуна"
               />
               <div class="service-copy">
                 <dt data-i18n="service1Title">
@@ -654,6 +797,8 @@
                 alt="Ilustración de batería de coche"
                 data-alt-es="Ilustración de batería de coche"
                 data-alt-en="Car battery illustration"
+                data-alt-ru="Иллюстрация автомобильного аккумулятора"
+                data-alt-uk="Ілюстрація автомобільного акумулятора"
               />
               <div class="service-copy">
                 <dt data-i18n="service2Title">
@@ -672,6 +817,8 @@
                 alt="Ilustración de avería eléctrica"
                 data-alt-es="Ilustración de avería eléctrica"
                 data-alt-en="Electrical fault illustration"
+                data-alt-ru="Иллюстрация электрической неисправности"
+                data-alt-uk="Ілюстрація електричної несправності"
               />
               <div class="service-copy">
                 <dt data-i18n="service3Title">
@@ -689,6 +836,8 @@
                 alt="Ilustración de coche eléctrico o híbrido"
                 data-alt-es="Ilustración de coche eléctrico o híbrido"
                 data-alt-en="Electric and hybrid car illustration"
+                data-alt-ru="Иллюстрация электромобиля и гибрида"
+                data-alt-uk="Ілюстрація електромобіля та гібрида"
               />
               <div class="service-copy">
                 <dt data-i18n="service4Title">
@@ -707,6 +856,8 @@
                 alt="Ilustración de reparación eléctrica"
                 data-alt-es="Ilustración de reparación eléctrica"
                 data-alt-en="Electrical repair illustration"
+                data-alt-ru="Иллюстрация ремонта электрики"
+                data-alt-uk="Ілюстрація ремонту електрики"
               />
               <div class="service-copy">
                 <dt data-i18n="service5Title">
@@ -726,6 +877,8 @@
                 alt="Ilustración de inspección de coche usado"
                 data-alt-es="Ilustración de inspección de coche usado"
                 data-alt-en="Used car inspection illustration"
+                data-alt-ru="Иллюстрация проверки б/у автомобиля"
+                data-alt-uk="Ілюстрація перевірки вживаного авто"
               />
               <div class="service-copy">
                 <dt data-i18n="service6Title">Vas a comprar un coche usado</dt>
@@ -980,12 +1133,115 @@
           privacy:
             "This website does not use cookies or collect personal data. If you contact me by WhatsApp or phone, I use your data only to answer your enquiry.",
         },
+        ru: {
+          pageTitle: "AutoDiag Málaga | Диагностика и электрика автомобиля с выездом",
+          pageDescription: "Диагностика и ремонт автоэлектрики с выездом в Малаге, Торремолиносе, Бенальмадене, Фуэнхироле, Марбелье, Велес-Малаге и по всему Коста-дель-Соль. Пишите в WhatsApp.",
+          heroTitle: "Диагностика и электрика автомобиля с выездом в Малаге",
+          heroLead: "Горит чек, машина не заводится или глючит электрика? Приеду к вашей машине: домой, на работу или на улицу, по всему Коста-дель-Соль.",
+          heroExperience: "Занимаюсь сложными неисправностями. Опыт в диагностике автоэлектрики больше 4 лет, в том числе с электромобилями и высоковольтными системами.",
+          whatsapp: "Написать в WhatsApp",
+          call: "Позвонить 637 259 702",
+          whatsappShort: "WhatsApp",
+          callShort: "Позвонить",
+          servicesTitle: "Что случилось с вашей машиной?",
+          service1Title: "Горит индикатор двигателя",
+          service1Text: "Считываю ошибки профессиональным диагностическим оборудованием и нахожу реальную причину, а не только код.",
+          service2Title: "Не заводится или садится аккумулятор",
+          service2Text: "Проверяю аккумулятор, генератор, стартер и утечки тока, которые его разряжают.",
+          service3Title: "Электрические неисправности, которые то появляются, то пропадают",
+          service3Text: "Свет, стеклоподъёмники, центральный замок, датчики и проводка.",
+          service4Title: "Электромобили, гибриды и высоковольтные системы",
+          service4Text: "Диагностика неисправностей и ошибок в электромобилях и гибридах, включая высоковольтные системы.",
+          service5Title: "Ремонт электрики и электроники",
+          service5Text: "Ремонтирую проводку, датчики и электронику. Программирование и кодирование блоков, ремонт блоков управления, на месте, когда это возможно.",
+          service6Title: "Покупаете б/у автомобиль",
+          service6Text: "Проверка электрики и считывание ошибок до оплаты.",
+          howTitle: "Как это работает",
+          step1Title: "Пишете мне в WhatsApp",
+          step1Text: "Марка, модель, год и что случилось. Фото индикатора или сообщения очень помогает.",
+          step2Title: "Встречаемся в вашем районе",
+          step2Text: "Договариваемся о дне, времени и месте. Я приезжаю с оборудованием.",
+          step3Title: "Диагностика на месте",
+          step3Text: "Объясняю, что не так и что нужно делать. Если можно починить на месте, делаю это.",
+          zoneTitle: "Зона обслуживания",
+          zoneText: "И остальная часть Коста-дель-Соль. Если ваша машина в другом ближайшем городе, напишите, и решим.",
+          mapLink: "Открыть в Google Maps",
+          contactTitle: "Загорелся индикатор на панели?",
+          contactText: "Напишите марку, модель и пришлите фото индикатора. Отвечу как можно скорее.",
+          legalTitle: "Юридическая информация",
+          legalDetails: "Владелец: Oleksandr Smus · NIF: Z4350670H · Адрес: Camino San Alberto 5, 29010, Málaga · Телефон: 637 259 702 · Email: auto.diagnost0@gmail.com",
+          privacy: "Этот сайт не использует cookies и не собирает персональные данные. Если вы свяжетесь со мной через WhatsApp или по телефону, я использую ваши данные только для ответа на обращение.",
+        },
+        uk: {
+          pageTitle: "AutoDiag Málaga | Діагностика та електрика автомобіля з виїздом",
+          pageDescription: "Діагностика та ремонт автоелектрики з виїздом у Малазі, Торремолінос, Бенальмадені, Фуенхіролі, Марбельї, Велес-Малазі та по всьому Коста-дель-Соль. Пишіть у WhatsApp.",
+          heroTitle: "Діагностика та електрика автомобіля з виїздом у Малазі",
+          heroLead: "Горить чек, машина не заводиться чи глючить електрика? Приїду до вашої машини: додому, на роботу або на вулицю, по всьому Коста-дель-Соль.",
+          heroExperience: "Займаюся складними несправностями. Досвід у діагностиці автоелектрики понад 4 роки, зокрема з електромобілями та високовольтними системами.",
+          whatsapp: "Написати у WhatsApp",
+          call: "Зателефонувати 637 259 702",
+          whatsappShort: "WhatsApp",
+          callShort: "Дзвінок",
+          servicesTitle: "Що сталося з вашою машиною?",
+          service1Title: "Горить індикатор двигуна",
+          service1Text: "Зчитую помилки професійним діагностичним обладнанням і знаходжу справжню причину, а не лише код.",
+          service2Title: "Не заводиться або сідає акумулятор",
+          service2Text: "Перевіряю акумулятор, генератор, стартер і витоки струму, які його розряджають.",
+          service3Title: "Електричні несправності, що з’являються й зникають",
+          service3Text: "Світло, склопідіймачі, центральний замок, датчики та проводка.",
+          service4Title: "Електромобілі, гібриди та високовольтні системи",
+          service4Text: "Діагностика несправностей і помилок в електромобілях та гібридах, зокрема високовольтних систем.",
+          service5Title: "Ремонт електрики та електроніки",
+          service5Text: "Ремонтую проводку, датчики та електроніку. Програмування і кодування блоків, ремонт блоків керування, на місці, коли це можливо.",
+          service6Title: "Купуєте вживане авто",
+          service6Text: "Перевірка електрики та зчитування помилок до оплати.",
+          howTitle: "Як це працює",
+          step1Title: "Пишете мені у WhatsApp",
+          step1Text: "Марка, модель, рік і що сталося. Фото індикатора або повідомлення дуже допомагає.",
+          step2Title: "Зустрічаємося у вашому районі",
+          step2Text: "Домовляємося про день, час і місце. Я приїжджаю з обладнанням.",
+          step3Title: "Діагностика на місці",
+          step3Text: "Пояснюю, що не так і що потрібно робити. Якщо можна полагодити на місці, роблю це.",
+          zoneTitle: "Зона обслуговування",
+          zoneText: "І решта Коста-дель-Соль. Якщо ваша машина в іншому найближчому місті, напишіть, і вирішимо.",
+          mapLink: "Відкрити в Google Maps",
+          contactTitle: "Загорівся індикатор на панелі?",
+          contactText: "Напишіть марку, модель і надішліть фото індикатора. Відповім якнайшвидше.",
+          legalTitle: "Юридична інформація",
+          legalDetails: "Власник: Oleksandr Smus · NIF: Z4350670H · Адреса: Camino San Alberto 5, 29010, Málaga · Телефон: 637 259 702 · Email: auto.diagnost0@gmail.com",
+          privacy: "Цей сайт не використовує cookies і не збирає персональні дані. Якщо ви зв’яжетеся зі мною через WhatsApp або телефоном, я використовую ваші дані лише для відповіді на звернення.",
+        },
       };
 
       const whatsappMessages = {
         es: "Hola, necesito una diagnosis a domicilio.\nMarca y modelo:\nSíntoma:\nZona:",
         en: "Hello, I need a mobile car diagnosis.\nMake and model:\nSymptom:\nArea:",
+        ru: "Здравствуйте, мне нужна диагностика автомобиля с выездом.\nМарка и модель:\nСимптом:\nРайон:",
+        uk: "Вітаю, мені потрібна діагностика автомобіля з виїздом.\nМарка і модель:\nСимптом:\nРайон:",
       };
+
+      const languageCodes = { es: "ES", en: "EN", ru: "RU", uk: "UA" };
+      const langSwitch = document.getElementById("lang-switch");
+      const langToggle = document.getElementById("lang-toggle");
+      const langMenu = document.getElementById("lang-menu");
+      const langCode = document.getElementById("lang-code");
+
+      function setLanguageMenu(open) {
+        langToggle.setAttribute("aria-expanded", String(open));
+        langMenu.hidden = !open;
+      }
+      langToggle.addEventListener("click", () =>
+        setLanguageMenu(langMenu.hidden),
+      );
+      document.addEventListener("click", (event) => {
+        if (!langSwitch.contains(event.target)) setLanguageMenu(false);
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !langMenu.hidden) {
+          setLanguageMenu(false);
+          langToggle.focus();
+        }
+      });
 
       function setLanguage(language) {
         const dictionary = translations[language];
@@ -1001,16 +1257,19 @@
         });
         document.querySelectorAll("[data-language]").forEach((button) => {
           button.setAttribute(
-            "aria-pressed",
+            "aria-selected",
             button.dataset.language === language,
           );
         });
-        document
-          .querySelectorAll("[data-alt-es][data-alt-en]")
-          .forEach((image) => {
-            image.alt =
-              language === "es" ? image.dataset.altEs : image.dataset.altEn;
-          });
+        langCode.textContent = languageCodes[language];
+        langToggle
+          .querySelector("use")
+          .setAttribute("href", "#flag-" + language);
+        setLanguageMenu(false);
+        document.querySelectorAll("[data-alt-es]").forEach((image) => {
+          image.alt =
+            image.getAttribute("data-alt-" + language) || image.dataset.altEn;
+        });
         document
           .querySelectorAll('a[href^="https://wa.me/"]')
           .forEach((link) => {
@@ -1018,7 +1277,9 @@
               "https://wa.me/34637259702?text=" +
               encodeURIComponent(whatsappMessages[language]);
           });
-        localStorage.setItem("autodiag-language", language);
+        try {
+          localStorage.setItem("autodiag-language", language);
+        } catch (error) {}
       }
 
       document.querySelectorAll("[data-language]").forEach((button) => {
@@ -1026,7 +1287,11 @@
           setLanguage(button.dataset.language),
         );
       });
-      setLanguage(localStorage.getItem("autodiag-language") || "es");
+      let savedLanguage = "es";
+      try {
+        savedLanguage = localStorage.getItem("autodiag-language") || "es";
+      } catch (error) {}
+      setLanguage(translations[savedLanguage] ? savedLanguage : "es");
     </script>
   </body>
 </html>
